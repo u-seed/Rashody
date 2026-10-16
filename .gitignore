@@ -1,0 +1,4 @@
+input/*.pdf
+input/**/*.pdf
+docs/data.json
+__pycache__/
