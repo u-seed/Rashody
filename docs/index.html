@@ -7,110 +7,143 @@
 <title>Семейные финансы</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
 <style>
-:root{--bg:#f4f5f7;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e5e7eb;--acc:#4f46e5;--in:#16a34a;--out:#e11d48;--chip:#eef0f4;--shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(15,23,42,.05)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1020;--card:#141a2e;--ink:#e8ecf5;--mut:#8b96b1;--line:#232b45;--acc:#818cf8;--in:#4ade80;--out:#fb7185;--chip:#1c2440;--shadow:none}}
-:root[data-theme=dark]{--bg:#0b1020;--card:#141a2e;--ink:#e8ecf5;--mut:#8b96b1;--line:#232b45;--acc:#818cf8;--in:#4ade80;--out:#fb7185;--chip:#1c2440;--shadow:none}
+:root{--bg:#f3f4f8;--card:#fff;--ink:#0f172a;--mut:#6b7280;--line:#eceef3;--acc:#4f46e5;--accs:#eef2ff;--in:#059669;--ins:#d1fae5;--out:#e11d48;--outs:#ffe4e6;--warn:#d97706;--warns:#fef3c7;--chip:#eceef4;--shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px rgba(15,23,42,.06)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a0e1c;--card:#131a2e;--ink:#eef1f8;--mut:#93a0bd;--line:#222b46;--acc:#818cf8;--accs:#1e2547;--in:#34d399;--ins:#0f3d31;--out:#fb7185;--outs:#4a1626;--warn:#fbbf24;--warns:#43310d;--chip:#1b2340;--shadow:none}}
+:root[data-theme=dark]{--bg:#0a0e1c;--card:#131a2e;--ink:#eef1f8;--mut:#93a0bd;--line:#222b46;--acc:#818cf8;--accs:#1e2547;--in:#34d399;--ins:#0f3d31;--out:#fb7185;--outs:#4a1626;--warn:#fbbf24;--warns:#43310d;--chip:#1b2340;--shadow:none}
 *{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.wrap{max-width:1100px;margin:0 auto;padding:14px}
-h1{font-size:20px;margin:0}h2{font-size:16px;margin:0 0 10px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
-.mut{color:var(--mut)}.small{font-size:12px}
-.card{background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--shadow);margin-bottom:12px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:1080px;margin:0 auto;padding:16px 14px 60px}
+h1{font-size:22px;margin:0;letter-spacing:-.3px}
+h2{font-size:18px;margin:0;letter-spacing:-.2px}
+.hd{margin-bottom:14px}.hd p{margin:2px 0 0;color:var(--mut);font-size:13px}
+.mut{color:var(--mut)}.small{font-size:13px}
+.card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:14px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.chip{border:0;background:var(--chip);color:var(--ink);padding:7px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
-.chip.on{background:var(--acc);color:#fff}
-select,input[type=search],input[type=password]{font:inherit;font-size:14px;background:var(--chip);color:var(--ink);border:1px solid transparent;border-radius:10px;padding:7px 10px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
-.kpi{background:var(--card);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow)}
-.kpi .l{font-size:12px;color:var(--mut)}.kpi .v{font-size:21px;font-weight:700;margin-top:2px;white-space:nowrap}.kpi .s{font-size:12px;color:var(--mut)}
-.in{color:var(--in)}.out{color:var(--out)}
-.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.chip{border:0;background:var(--chip);color:var(--ink);padding:9px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--acc);color:#fff;font-weight:600}
+.chip.sm{padding:5px 10px;font-size:12px}
+select,input[type=search],input[type=password],input[type=text]{font:inherit;font-size:15px;background:var(--chip);color:var(--ink);border:1px solid transparent;border-radius:12px;padding:9px 12px;max-width:100%}
+.sticky{position:sticky;top:0;z-index:5;background:var(--bg);padding:6px 0 8px;margin:0 -2px}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}.tabs::-webkit-scrollbar{display:none}
 .tab{flex:none}
-.grid2>*,.card,.kpi{min-width:0}.grid2{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:860px){.grid2{grid-template-columns:1fr 1fr}}
-.catrow{display:grid;grid-template-columns:28px 1fr auto;gap:2px 10px;align-items:center;padding:8px 4px;border-radius:10px;cursor:pointer}
-.catrow:hover{background:var(--chip)}
-.catrow .ic{font-size:20px;grid-row:span 2;text-align:center}
-.catrow .nm{font-weight:600}.catrow .am{font-weight:700;text-align:right;white-space:nowrap}
-.bar{height:7px;border-radius:5px;background:var(--chip);overflow:hidden;grid-column:2}.bar i{display:block;height:100%;border-radius:5px}
-.catrow .sub{grid-column:3;text-align:right;font-size:12px;color:var(--mut);white-space:nowrap}
-.scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{padding:6px 8px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:720px){.hero{grid-template-columns:1.2fr 1fr 1fr}}
+.big{font-size:30px;font-weight:800;letter-spacing:-1px;white-space:nowrap}
+.lbl{font-size:13px;color:var(--mut);margin-bottom:2px}
+.in{color:var(--in)}.out{color:var(--out)}
+.split{height:10px;border-radius:6px;background:var(--out);overflow:hidden;margin-top:12px}.split i{display:block;height:100%;background:var(--in)}
+.banner{display:flex;gap:12px;align-items:center;background:var(--warns);color:var(--ink);border-radius:16px;padding:12px 14px;margin-bottom:16px;cursor:pointer}
+.banner b{color:var(--warn)}
+.grid2{display:grid;grid-template-columns:1fr;gap:16px}@media(min-width:900px){.grid2{grid-template-columns:1fr 1fr}}
+.grid2>*{min-width:0}.grid2 .card{margin-bottom:0}
+.dn{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
+.dn svg{flex:none}.dn .lst{flex:1;min-width:230px}
+.lrow{display:flex;align-items:center;gap:10px;padding:9px 6px;border-radius:12px;cursor:pointer}
+.lrow:hover,.lrow:active{background:var(--chip)}
+.lrow .dot{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:18px;flex:none}
+.lrow .mid{flex:1;min-width:0}.lrow .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .bar{height:6px;border-radius:4px;background:var(--chip);margin-top:5px;overflow:hidden}.lrow .bar i{display:block;height:100%;border-radius:4px}
+.lrow .rt{text-align:right;white-space:nowrap}.lrow .rt b{display:block}.lrow .rt span{font-size:12px;color:var(--mut)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:500;font-size:12px}
 th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--card)}
-td.tl,th.tl{text-align:left;white-space:normal}
-.heat{border-radius:6px}
-.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;margin-top:8px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px}
-.ins{display:grid;gap:8px}.ins div{background:var(--chip);border-radius:12px;padding:10px 12px}
-.modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:9}
-.modal.on{display:flex}
-.sheet{background:var(--bg);width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
-@media(min-width:860px){.modal{align-items:center}.sheet{border-radius:20px}}
-.tx{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;padding:8px 0;border-bottom:1px solid var(--line);align-items:center}
-.tx .d{font-size:12px;color:var(--mut)}.tx .a{font-weight:700;white-space:nowrap}.tx .c{font-size:12px;color:var(--mut);grid-column:2/4}
-#lock{max-width:360px;margin:14vh auto;text-align:center}
+td.tl{text-align:left;white-space:normal}
+.heat{display:block;padding:4px 8px;border-radius:8px;cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-top:10px;color:var(--mut)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
+.ins{display:grid;gap:10px;margin-top:12px}.ins div{background:var(--accs);border-radius:14px;padding:12px 14px}
+.mon{display:grid;grid-template-columns:70px 1fr auto;gap:4px 12px;align-items:center;padding:12px 6px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:12px}
+.mon:hover{background:var(--chip)}.mon .m{font-weight:700}
+.mon .b{height:8px;border-radius:5px;background:var(--chip);overflow:hidden}.mon .b i{display:block;height:100%;background:var(--out);border-radius:5px}
+.mon .v{text-align:right;white-space:nowrap}.mon .why{grid-column:2/4;font-size:13px;color:var(--mut)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--warns);color:var(--warn);margin-left:6px;vertical-align:middle}
+.badge.g{background:var(--chip);color:var(--mut)}
+.modal{position:fixed;inset:0;background:rgba(2,6,23,.6);display:none;align-items:flex-end;justify-content:center;z-index:20;backdrop-filter:blur(2px)}
+.modal.on{display:flex}#ed{z-index:30}
+.sheet{background:var(--bg);width:100%;max-width:780px;max-height:93vh;overflow:auto;border-radius:24px 24px 0 0;padding:16px;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+@media(min-width:900px){.modal{align-items:center}.sheet{border-radius:24px;max-height:90vh}}
+.sheet .card{box-shadow:none;border:1px solid var(--line)}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.kp div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px}
+.kp b{display:block;font-size:19px;white-space:nowrap}
+.tx{display:grid;grid-template-columns:48px 1fr auto;gap:2px 10px;padding:10px 4px;border-bottom:1px solid var(--line);align-items:center;cursor:pointer;border-radius:10px}
+.tx:hover{background:var(--chip)}.tx .d{font-size:12px;color:var(--mut)}.tx .nm{overflow:hidden;text-overflow:ellipsis}.tx .a{font-weight:700;white-space:nowrap}.tx .c{font-size:12px;color:var(--mut);grid-column:2/4}
+.why-box{background:var(--warns);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:14px}
+.why-box li{margin:3px 0}
+#lock{max-width:380px;margin:14vh auto;text-align:center}
 #lock input{width:100%;margin:10px 0}
-button.main{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:600;width:100%;cursor:pointer}
+button.main{background:var(--acc);color:#fff;border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:700;width:100%;cursor:pointer}
+button.sec{background:var(--chip);color:var(--ink);border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:600;cursor:pointer}
 .err{color:var(--out);min-height:20px;font-size:13px}
-.note{font-size:12px;color:var(--mut);margin:4px 2px 12px}
+.note{font-size:13px;color:var(--mut);margin:6px 4px}
+.rev{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.rev .why{grid-column:1/3;font-size:12px;color:var(--warn)}.rev .btns{grid-column:1/3;display:flex;gap:6px}
+label.f{display:block;font-size:13px;color:var(--mut);margin:12px 0 4px}
 </style>
 </head>
 <body>
 <div class="wrap">
  <div id="lock" class="card" style="display:none">
-  <div style="font-size:42px">🔒</div><h2>Семейные финансы</h2>
-  <div class="mut small">Данные зашифрованы, пароль знаете только вы</div>
+  <div style="font-size:44px">🔒</div><h2>Семейные финансы</h2>
+  <div class="mut small">Данные зашифрованы. Введите пароль.</div>
   <input id="pw" type="password" placeholder="Пароль" autocomplete="current-password">
   <label class="small mut"><input type="checkbox" id="rem" checked> запомнить на этом устройстве</label>
   <div class="err" id="err"></div>
   <button class="main" id="go">Открыть</button>
  </div>
  <div id="app" style="display:none">
-  <div class="top"><div><h1>💰 Семейные финансы</h1><div class="mut small" id="sub"></div></div>
-   <button class="chip" id="theme" title="Тема">🌓</button></div>
-  <div class="card">
+  <div class="top"><div class="hd"><h1>💰 Семейные финансы</h1><p id="sub"></p></div><button class="chip" id="theme">🌓</button></div>
+  <div class="card" style="padding:14px">
    <div class="row" id="periodChips"></div>
-   <div class="row" style="margin-top:8px">
-    <select id="from"></select><span class="mut">→</span><select id="to"></select>
-    <select id="who"></select>
-    <button class="chip" id="lifeBtn" title="Только покупки: без переводов людям, наличных и кредитов">Только быт</button>
-   </div>
+   <div class="row" style="margin-top:10px"><select id="from"></select><span class="mut">→</span><select id="to"></select><select id="who"></select>
+    <button class="chip" id="lifeBtn">Без переводов и кредитов</button></div>
   </div>
-  <div class="kpis" id="kpis"></div>
-  <div class="tabs" id="tabs"></div>
-  <div id="view"></div>
+  <div class="sticky"><div class="tabs" id="tabs"></div></div>
+  <div id="view" style="margin-top:8px"></div>
   <div class="note" id="foot"></div>
  </div>
 </div>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="modal" id="ed"><div class="sheet" id="edsheet"></div></div>
 
 <script>
 "use strict";
 const $ = s => document.querySelector(s);
 const MN = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+const MF = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
 const fmt = n => Math.round(n).toLocaleString("ru-RU").replace(/\u00a0/g," ");
 const short = n => { const a=Math.abs(n); return a>=1e6 ? (n/1e6).toFixed(a>=1e7?0:1).replace(".",",")+" млн" : a>=1e3 ? Math.round(n/1e3)+" тыс" : Math.round(n)+""; };
-const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const mLabel = m => MN[+m.slice(5)-1] + " " + m.slice(2,4);
-let D, ST = {from:"", to:"", who:"all", life:false, tab:"over", search:"", cat:"", dir:"all", page:1};
+const mFull = m => MF[+m.slice(5)-1] + " " + m.slice(0,4);
+const J = o => esc(JSON.stringify(o));
+let D, INT, LOAN, MONEY, INCC;
+let ST = {from:"", to:"", who:"all", life:false, tab:"over", search:"", cat:"", dir:"all", page:1};
+let STACK = [];
+let OV = {tx:{}, merchant:{}};
+try { OV = JSON.parse(localStorage.getItem("ff_ov") || "") || OV; } catch(e){}
+const saveOV = () => { try { localStorage.setItem("ff_ov", JSON.stringify(OV)); } catch(e){} };
+const tkey = t => `${t.d}|${+t.amt.toFixed(2)}|${t.m}|${t.a}`;
+const clsFor = (cat, dir) => INT.has(cat) ? "internal" : LOAN.has(cat) ? "loan_in" : dir==="in" ? "income" : "expense";
 
-/* ───── загрузка и расшифровка ───── */
+/* ───── загрузка ───── */
 async function decrypt(blob, pw){
   const b = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
   const key = await crypto.subtle.deriveKey({name:"PBKDF2",salt:b(blob.salt),iterations:blob.iter,hash:"SHA-256"}, km, {name:"AES-GCM",length:256}, false, ["decrypt"]);
   const buf = await crypto.subtle.decrypt({name:"AES-GCM",iv:b(blob.iv)}, key, b(blob.ct));
-  const txt = await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
-  return JSON.parse(txt);
+  return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
 }
 async function boot(){
   let blob=null, plain=null;
   try { const r = await fetch("data.enc.json",{cache:"no-store"}); if(r.ok) blob = await r.json(); } catch(e){}
   if(!blob){ try { const r = await fetch("data.json",{cache:"no-store"}); if(r.ok) plain = await r.json(); } catch(e){} }
   if(plain){ start(plain); return; }
-  if(!blob){ $("#lock").style.display="block"; $("#lock").innerHTML="<h2>Нет данных</h2><div class='mut'>Запустите <code>python scripts/build.py</code> и загрузите docs/data.enc.json</div>"; return; }
   $("#lock").style.display="block";
-  const attempt = async pw => { try { start(await decrypt(blob, pw)); if($("#rem").checked) localStorage.setItem("ff_pw", pw); return true; } catch(e){ return false; } };
+  if(!blob){ $("#lock").innerHTML="<h2>Нет данных</h2><div class='mut'>Загрузите docs/data.enc.json</div>"; return; }
+  const attempt = async pw => { try { start(await decrypt(blob, pw)); if($("#rem").checked) localStorage.setItem("ff_pw", pw); return true; } catch(e){ console.error(e); return false; } };
   const saved = localStorage.getItem("ff_pw"); if(saved && await attempt(saved)) return;
   const go = async () => { $("#err").textContent=""; $("#go").textContent="Расшифровываю…"; const ok = await attempt($("#pw").value); $("#go").textContent="Открыть"; if(!ok) $("#err").textContent="Неверный пароль"; };
   $("#go").onclick = go; $("#pw").onkeydown = e => { if(e.key==="Enter") go(); };
@@ -119,11 +152,13 @@ async function boot(){
 /* ───── старт ───── */
 function start(data){
   D = data; $("#lock").style.display="none"; $("#app").style.display="block";
+  INT = new Set(D.kinds.internal); LOAN = new Set(D.kinds.loan); INCC = D.kinds.income; MONEY = new Set(D.groups.money);
+  D.tx.forEach((t,i) => { t.id = i; t.bc = t.cat; t.bl = t.cls; });
+  applyOV();
   D.months = [...new Set(D.tx.map(t => t.d.slice(0,7)))].sort();
   const last = D.months[D.months.length-1];
-  // последний месяц может быть неполным — по умолчанию показываем 12 мес. до него включительно
   ST.to = last; ST.from = D.months[Math.max(0, D.months.length-12)];
-  const opts = D.months.map(m => `<option value="${m}">${mLabel(m)}</option>`).join("");
+  const opts = D.months.map(m => `<option value="${m}">${mFull(m)}</option>`).join("");
   $("#from").innerHTML = opts; $("#to").innerHTML = opts;
   $("#who").innerHTML = `<option value="all">Вся семья</option>` + D.people.map(p => `<option>${esc(p)}</option>`).join("");
   $("#periodChips").innerHTML = [["3 мес",3],["6 мес",6],["12 мес",12],["Всё время",999]].map(([l,n]) => `<button class="chip" data-n="${n}">${l}</button>`).join("");
@@ -132,159 +167,292 @@ function start(data){
   $("#to").onchange = e => { ST.to = e.target.value; if(ST.from>ST.to) ST.from=ST.to; sync(); render(); };
   $("#who").onchange = e => { ST.who = e.target.value; render(); };
   $("#lifeBtn").onclick = () => { ST.life = !ST.life; render(); };
-  const tabs = [["over","Обзор"],["cat","Категории"],["mon","По месяцам"],["peo","Люди и переводы"],["ops","Операции"]];
-  $("#tabs").innerHTML = tabs.map(([k,l]) => `<button class="chip tab" data-k="${k}">${l}</button>`).join("");
-  $("#tabs").onclick = e => { const k = e.target.dataset.k; if(k){ ST.tab = k; ST.page=1; render(); } };
-  $("#theme").onclick = () => { const r = document.documentElement; const dark = getComputedStyle(r).getPropertyValue("--bg").trim()==="#0b1020"; r.dataset.theme = dark ? "light" : "dark"; render(); };
-  $("#modal").onclick = e => { if(e.target.id==="modal") $("#modal").classList.remove("on"); };
-  $("#sub").textContent = `данные: ${D.tx[0] ? D.tx[0].d : ""} — ${D.tx[D.tx.length-1].d} · обновлено ${D.generated}`;
+  $("#tabs").onclick = e => { const k = e.target.dataset.k; if(k){ ST.tab = k; ST.page=1; render(); window.scrollTo({top:0}); } };
+  $("#theme").onclick = () => { const r = document.documentElement; const dark = getComputedStyle(r).getPropertyValue("--bg").trim()==="#0a0e1c"; r.dataset.theme = dark ? "light" : "dark"; render(); };
+  $("#modal").onclick = e => { if(e.target.id==="modal") closeDrill(); };
+  $("#ed").onclick = e => { if(e.target.id==="ed") $("#ed").classList.remove("on"); };
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-d]"); if(a && !e.target.closest("#ed")){ drill(JSON.parse(a.dataset.d)); return; }
+    const b = e.target.closest("[data-e]"); if(b){ openEdit(D.tx[+b.dataset.e]); }
+  });
+  $("#sub").textContent = `данные: ${D.tx[0].d.split("-").reverse().join(".")} — ${D.tx[D.tx.length-1].d.split("-").reverse().join(".")} · обновлено ${D.generated}`;
   sync(); render();
 }
-function sync(){ $("#from").value = ST.from; $("#to").value = ST.to; }
+const sync = () => { $("#from").value = ST.from; $("#to").value = ST.to; };
+function applyOV(){
+  D.tx.forEach(t => {
+    t.cat = t.bc; t.cls = t.bl; t.lov = 0;
+    const n = OV.tx[tkey(t)] || OV.merchant[t.m+"|"+t.dir];
+    if(n){ t.cat = n; t.cls = clsFor(n, t.dir); t.lov = 1; }
+  });
+}
 
 /* ───── вычисления ───── */
-const LIFE = () => new Set(D.groups.life);
-function monthsIn(from,to){ return D.months.filter(m => m>=from && m<=to); }
+const monthsIn = (f,t) => D.months.filter(m => m>=f && m<=t);
+const isLifeExp = t => !MONEY.has(t.cat);
 function view(){
-  const ms = monthsIn(ST.from, ST.to), set = new Set(ms), life = LIFE();
-  let tx = D.tx.filter(t => set.has(t.d.slice(0,7)) && (ST.who==="all" || t.p===ST.who));
+  const ms = monthsIn(ST.from, ST.to), set = new Set(ms);
+  const tx = D.tx.filter(t => set.has(t.d.slice(0,7)) && (ST.who==="all" || t.p===ST.who));
   const inc = tx.filter(t => t.cls==="income");
   let exp = tx.filter(t => t.cls==="expense");
-  if(ST.life) exp = exp.filter(t => life.has(t.cat));
+  if(ST.life) exp = exp.filter(isLifeExp);
   return {ms, tx, inc, exp, internal: tx.filter(t => t.cls==="internal"), loan: tx.filter(t => t.cls==="loan_in")};
 }
 const sum = a => a.reduce((s,t) => s+t.amt, 0);
 function by(arr, f){ const m = new Map(); for(const t of arr){ const k = f(t); m.set(k, (m.get(k)||0)+t.amt); } return m; }
 const sortDesc = m => [...m.entries()].sort((a,b) => b[1]-a[1]);
-const style = c => (D.categories[c] || {c:"#9ca3af", i:"•"});
+const hash = s => { let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))>>>0; return h; };
+const style = c => D.categories[c] || {c:`hsl(${hash(c)%360} 55% 55%)`, i:"🏷️"};
+const hexA = (h,a) => { if(h[0]!=="#") return h; const n = parseInt(h.slice(1),16); return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`; };
+const median = a => { const s=[...a].sort((x,y)=>x-y), n=s.length; return n? (n%2? s[(n-1)/2] : (s[n/2-1]+s[n/2])/2) : 0; };
+function anomalies(V){
+  const E = by(V.exp, t => t.d.slice(0,7)), vals = V.ms.map(m => E.get(m)||0), med = median(vals), out = new Map();
+  if(V.ms.length >= 4) V.ms.forEach(m => { const v = E.get(m)||0; if(v > med*1.5 && v-med > 100000) out.set(m, {v, med, pct: Math.round((v/med-1)*100)}); });
+  return {out, med, E};
+}
 
-/* ───── отрисовка ───── */
+/* ───── графики ───── */
+function donut(items, total, label){
+  const R=62, C=2*Math.PI*R; let off=0, g="";
+  items.forEach(([name,v,color,d]) => { const len = v/total*C; g += `<circle class="${d?"":""}" ${d?`data-d='${J(d)}' style="cursor:pointer"`:""} r="${R}" cx="90" cy="90" fill="none" stroke="${color}" stroke-width="26" stroke-dasharray="${Math.max(len-1.5,0.5)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 90 90)"><title>${esc(name)}: ${fmt(v)} ₸</title></circle>`; off += len; });
+  return `<svg width="180" height="180" viewBox="0 0 180 180">${g}<text x="90" y="86" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">${short(total)}</text><text x="90" y="106" text-anchor="middle" font-size="12" fill="var(--mut)">${label}</text></svg>`;
+}
+function catRows(arr, cls, limit, V, nomon){
+  const m = by(arr, t => t.cat), tot = sum(arr)||1, n = V.ms.length||1, rows = sortDesc(m).slice(0, limit||99), mx = rows[0] ? rows[0][1] : 1;
+  return rows.map(([c,v]) => { const s = style(c); return `<div class="lrow" data-d='${J({cat:c,cls,title:c})}'><div class="dot" style="background:${hexA(s.c,.18)}">${s.i}</div><div class="mid"><div class="nm">${esc(c)}</div><div class="bar"><i style="width:${v/mx*100}%;background:${s.c}"></i></div></div><div class="rt"><b>${fmt(v)} ₸</b><span>${(v/tot*100).toFixed(0)}%${nomon?"":" · "+short(v/n)+"/мес"}</span></div></div>`; }).join("") || `<div class="mut">Нет данных за период</div>`;
+}
+function donutBlock(arr, cls, label, V, limit=8){
+  const m = sortDesc(by(arr, t => t.cat)), tot = sum(arr)||1;
+  const top = m.slice(0,7), rest = m.slice(7).reduce((s,x)=>s+x[1],0);
+  const items = top.map(([c,v]) => [c,v,style(c).c,{cat:c,cls,title:c}]); if(rest>0) items.push(["Остальное",rest,"#94a3b8",null]);
+  return `<div class="dn">${donut(items, tot, label)}<div class="lst">${catRows(arr, cls, limit, V)}</div></div>`;
+}
+function monthBars(V, mode){
+  const ms = V.ms, I = by(V.inc, t => t.d.slice(0,7)), E = by(V.exp, t => t.d.slice(0,7)), an = anomalies(V).out;
+  const mx = Math.max(1, ...ms.map(m => Math.max(mode==="exp"?0:(I.get(m)||0), E.get(m)||0)));
+  const sw = mode==="exp" ? 46 : 54, W = Math.max(320, ms.length*sw+10), H = 200, pad = 24, bh = H-pad-26;
+  let g = "";
+  ms.forEach((m,i) => { const x = i*sw+8, hi = (I.get(m)||0)/mx*bh, he = (E.get(m)||0)/mx*bh, flag = an.has(m);
+    g += `<g data-d='${J({month:m,title:mFull(m)})}' style="cursor:pointer"><rect x="${x-4}" y="0" width="${sw-2}" height="${H}" fill="transparent"/>`;
+    if(mode!=="exp") g += `<rect x="${x}" y="${H-pad-hi}" width="17" height="${hi}" rx="4" fill="var(--in)"/>`;
+    g += `<rect x="${mode==="exp"?x+4:x+19}" y="${H-pad-he}" width="${mode==="exp"?26:17}" height="${he}" rx="4" fill="${flag?"var(--warn)":"var(--out)"}"/>`;
+    g += `<text x="${x+(mode==="exp"?17:18)}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mut)">${MN[+m.slice(5)-1]}</text>`;
+    g += `<text x="${x+(mode==="exp"?17:18)}" y="${H-pad-Math.max(mode==="exp"?0:hi,he)-5}" font-size="10" text-anchor="middle" fill="${flag?"var(--warn)":"var(--mut)"}" font-weight="${flag?700:400}">${flag?"⚠ ":""}${short(Math.max(mode==="exp"?0:(I.get(m)||0),E.get(m)||0))}</text></g>`; });
+  return `<div class="scroll"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${g}</svg></div><div class="legend">${mode==="exp"?"":`<span><i style="background:var(--in)"></i>приходы</span>`}<span><i style="background:var(--out)"></i>расходы</span><span><i style="background:var(--warn)"></i>аномальный месяц</span><span>нажмите на месяц — узнаете почему</span></div>`;
+}
+function stackedIncome(V){
+  const ms = V.ms, cats = sortDesc(by(V.inc, t => t.cat)).map(x=>x[0]).slice(0,6);
+  const data = ms.map(m => { const r = {}; V.inc.filter(t => t.d.startsWith(m)).forEach(t => { const k = cats.includes(t.cat)?t.cat:"Остальное"; r[k]=(r[k]||0)+t.amt; }); return r; });
+  const all = [...cats,"Остальное"], tot = r => all.reduce((s,c)=>s+(r[c]||0),0), mx = Math.max(1,...data.map(tot)), W = Math.max(320, ms.length*46+10), H=210, pad=24;
+  let g = "";
+  data.forEach((r,i) => { let y=H-pad; const x=i*46+8; g += `<g data-d='${J({month:ms[i],cls:"income",title:"Приходы: "+mFull(ms[i])})}' style="cursor:pointer">`;
+    all.forEach(c => { const h=(r[c]||0)/mx*(H-pad-24); if(h<=0) return; y-=h; g += `<rect x="${x}" y="${y}" width="30" height="${h}" fill="${c==="Остальное"?"#94a3b8":style(c).c}"><title>${c}: ${fmt(r[c])} ₸</title></rect>`; });
+    g += `<text x="${x+15}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mut)">${MN[+ms[i].slice(5)-1]}</text><text x="${x+15}" y="${y-5}" font-size="10" text-anchor="middle" fill="var(--mut)">${short(tot(r))}</text></g>`; });
+  return `<div class="scroll"><svg width="${W}" height="${H}">${g}</svg></div><div class="legend">${all.map(c=>`<span><i style="background:${c==="Остальное"?"#94a3b8":style(c).c}"></i>${esc(c)}</span>`).join("")}</div>`;
+}
+function stackedExp(V){
+  const ms = V.ms, cats = sortDesc(by(V.exp, t => t.cat)).map(x=>x[0]).slice(0,9);
+  const data = ms.map(m => { const r = {}; V.exp.filter(t => t.d.startsWith(m)).forEach(t => { const k = cats.includes(t.cat)?t.cat:"Остальное"; r[k]=(r[k]||0)+t.amt; }); return r; });
+  const all = [...cats,"Остальное"], tot = r => all.reduce((s,c)=>s+(r[c]||0),0), mx = Math.max(1,...data.map(tot)), W = Math.max(320, ms.length*46+10), H=220, pad=24;
+  let g = "";
+  data.forEach((r,i) => { let y=H-pad; const x=i*46+8; g += `<g data-d='${J({month:ms[i],cls:"expense",title:"Расходы: "+mFull(ms[i])})}' style="cursor:pointer">`;
+    all.forEach(c => { const h=(r[c]||0)/mx*(H-pad-24); if(h<=0) return; y-=h; g += `<rect x="${x}" y="${y}" width="30" height="${h}" fill="${c==="Остальное"?"#94a3b8":style(c).c}"><title>${c}: ${fmt(r[c])} ₸</title></rect>`; });
+    g += `<text x="${x+15}" y="${H-8}" font-size="11" text-anchor="middle" fill="var(--mut)">${MN[+ms[i].slice(5)-1]}</text><text x="${x+15}" y="${y-5}" font-size="10" text-anchor="middle" fill="var(--mut)">${short(tot(r))}</text></g>`; });
+  return `<div class="scroll"><svg width="${W}" height="${H}">${g}</svg></div><div class="legend">${all.map(c=>`<span><i style="background:${c==="Остальное"?"#94a3b8":style(c).c}"></i>${esc(c)}</span>`).join("")}</div>`;
+}
+
+/* ───── разбор «на проверку» ───── */
+function reviewItems(V){
+  const out = [];
+  V.tx.forEach(t => {
+    if(t.lov || t.ov) return;
+    let why = null;
+    if(t.dir==="in" && t.amt>=500000 && ["Переводы от людей","Прочие поступления","Пополнение с карт/наличными"].includes(t.cat)) why = "Крупный приход — откуда он?";
+    else if(t.cat==="Крупные поступления на счёт") why = "Крупная сумма не учтена в доходах (похоже на возврат с депозита) — верно?";
+    else if(t.cat==="Переводы людям" && t.cls==="expense" && t.amt>=500000) why = "Крупный перевод — на что он?";
+    else if(t.cls==="expense" && t.cat==="Маркетплейс (уточнить)" && t.amt>=20000) why = "Что куплено на маркетплейсе?";
+    else if(t.cls==="expense" && t.cat==="Прочие покупки" && t.amt>=30000) why = "Магазин не распознан";
+    else if(t.cls==="expense" && !MONEY.has(t.cat) && t.amt>=100000) why = "Крупная покупка — категория верная?";
+    if(why) out.push({t, why});
+  });
+  return out.sort((a,b) => b.t.amt-a.t.amt);
+}
+
+/* ───── главный рендер ───── */
 function render(){
   const V = view(), n = V.ms.length || 1;
   document.querySelectorAll("#periodChips .chip").forEach(b => b.classList.toggle("on", monthsIn(ST.from,ST.to).length === Math.min(+b.dataset.n, D.months.length) && ST.to===D.months[D.months.length-1]));
   $("#lifeBtn").classList.toggle("on", ST.life);
-  document.querySelectorAll("#tabs .chip").forEach(b => b.classList.toggle("on", b.dataset.k===ST.tab));
-  const I = sum(V.inc), E = sum(V.exp);
-  $("#kpis").innerHTML = [
-    ["Доходы", fmt(I)+" ₸", `≈ ${short(I/n)} ₸ / мес`, "in"],
-    [ST.life ? "Траты на быт" : "Расходы", fmt(E)+" ₸", `≈ ${short(E/n)} ₸ / мес`, "out"],
-    ["Разница", (I-E>=0?"+":"−")+fmt(Math.abs(I-E))+" ₸", I-E>=0 ? "доходов больше" : "расходов больше", I-E>=0?"in":"out"],
-    ["Операций", fmt(V.tx.length), `${n} мес. · без переводов между своими`, ""]
-  ].map(([l,v,s,c]) => `<div class="kpi"><div class="l">${l}</div><div class="v ${c}">${v}</div><div class="s">${s}</div></div>`).join("");
-  $("#view").innerHTML = ({over:vOver, cat:vCat, mon:vMon, peo:vPeo, ops:vOps})[ST.tab](V);
+  const rv = reviewItems(V);
+  const tabs = [["over","Обзор"],["exp","Расходы"],["inc","Приходы"],["mon","Месяцы"],["peo","Люди и переводы"],["ops","Операции"],["rev","Проверить"+(rv.length?` (${rv.length})`:"")]];
+  $("#tabs").innerHTML = tabs.map(([k,l]) => `<button class="chip tab ${ST.tab===k?"on":""}" data-k="${k}">${l}</button>`).join("");
+  $("#view").innerHTML = ({over:vOver, exp:vExp, inc:vInc, mon:vMon, peo:vPeo, ops:vOps, rev:vRev})[ST.tab](V, rv);
   bindView(V);
-  const hid = sum(V.internal), ln = sum(V.loan);
-  $("#foot").innerHTML = `Не считаются ни доходом, ни расходом: переводы между своими счетами и членами семьи, депозиты — <b>${fmt(hid)} ₸</b> (${V.internal.length} оп.)` + (ln ? `; полученные кредиты — ${fmt(ln)} ₸` : "") + `. Платежи по кредитам входят в расходы (категория «Кредиты и долги»).`;
+  const nOv = Object.keys(OV.tx).length + Object.keys(OV.merchant).length;
+  $("#foot").innerHTML = `Не считаются ни приходом, ни расходом: переводы между своими счетами и членами семьи, депозиты — <b>${fmt(sum(V.internal))} ₸</b> (${V.internal.length} оп.)` + (sum(V.loan) ? `; полученные кредиты — ${fmt(sum(V.loan))} ₸` : "") + `. Платежи по кредитам входят в расходы.` + (nOv ? `<br>Ваших ручных правок: ${nOv} · <a href="#" onclick="copyOV();return false">скопировать, чтобы отправить Claude</a> · <a href="#" onclick="if(confirm('Сбросить правки на этом устройстве?')){OV={tx:{},merchant:{}};saveOV();applyOV();render();}return false">сбросить</a>` : "");
 }
-
-function barChart(V){
-  const ms = V.ms, I = by(V.inc, t => t.d.slice(0,7)), E = by(V.exp, t => t.d.slice(0,7));
-  const mx = Math.max(1, ...ms.map(m => Math.max(I.get(m)||0, E.get(m)||0)));
-  const W = Math.max(320, ms.length*46), H = 190, pad = 22, bw = 14;
-  let g = "";
-  ms.forEach((m,i) => { const x = i*46+8, hi = (I.get(m)||0)/mx*(H-pad-18), he = (E.get(m)||0)/mx*(H-pad-18);
-    g += `<rect x="${x}" y="${H-pad-hi}" width="${bw}" height="${hi}" rx="3" fill="var(--in)"><title>${mLabel(m)}: доход ${fmt(I.get(m)||0)} ₸</title></rect>`;
-    g += `<rect x="${x+bw+2}" y="${H-pad-he}" width="${bw}" height="${he}" rx="3" fill="var(--out)"><title>${mLabel(m)}: расход ${fmt(E.get(m)||0)} ₸</title></rect>`;
-    g += `<text x="${x+bw}" y="${H-6}" font-size="10" text-anchor="middle" fill="var(--mut)">${mLabel(m).slice(0,3)}</text>`;
-    g += `<text x="${x+bw+1}" y="${H-pad-Math.max(hi,he)-4}" font-size="9" text-anchor="middle" fill="var(--mut)">${short(Math.max(I.get(m)||0,E.get(m)||0))}</text>`; });
-  return `<div class="scroll"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${g}</svg></div><div class="legend"><span><i style="background:var(--in)"></i>доходы</span><span><i style="background:var(--out)"></i>расходы</span></div>`;
+function banner(rv){
+  if(!rv.length) return "";
+  return `<div class="banner" onclick="ST.tab='rev';render()"><div style="font-size:26px">🤔</div><div><b>${rv.length} операций нужно уточнить</b> на сумму ${fmt(rv.reduce((s,x)=>s+x.t.amt,0))} ₸<div class="small mut">Крупные суммы, где я не уверен в категории. Нажмите — ответите за минуту, и цифры станут точнее.</div></div></div>`;
 }
-function stacked(V){
-  const ms = V.ms, cats = sortDesc(by(V.exp, t => t.cat)).map(x => x[0]).slice(0,9);
-  const data = ms.map(m => { const r = {}; let other = 0; V.exp.filter(t => t.d.startsWith(m)).forEach(t => { if(cats.includes(t.cat)) r[t.cat]=(r[t.cat]||0)+t.amt; else other+=t.amt; }); r["Остальное"]=other; return r; });
-  const all = [...cats, "Остальное"], mx = Math.max(1, ...data.map(r => all.reduce((s,c)=>s+(r[c]||0),0)));
-  const W = Math.max(320, ms.length*46), H = 210, pad = 22;
-  let g = "";
-  data.forEach((r,i) => { let y = H-pad; const x = i*46+8; all.forEach(c => { const h = (r[c]||0)/mx*(H-pad-16); if(h<=0) return; y -= h; g += `<rect x="${x}" y="${y}" width="30" height="${h}" fill="${c==="Остальное"?"#94a3b8":style(c).c}"><title>${mLabel(ms[i])} · ${c}: ${fmt(r[c])} ₸</title></rect>`; });
-    g += `<text x="${x+15}" y="${H-6}" font-size="10" text-anchor="middle" fill="var(--mut)">${mLabel(ms[i]).slice(0,3)}</text><text x="${x+15}" y="${y-4}" font-size="9" text-anchor="middle" fill="var(--mut)">${short(all.reduce((s,c)=>s+(r[c]||0),0))}</text>`; });
-  return `<div class="scroll"><svg width="${W}" height="${H}">${g}</svg></div><div class="legend">${all.map(c => `<span><i style="background:${c==="Остальное"?"#94a3b8":style(c).c}"></i>${c}</span>`).join("")}</div>`;
-}
-function catList(V, limit){
-  const m = by(V.exp, t => t.cat), tot = sum(V.exp) || 1, n = V.ms.length || 1, rows = sortDesc(m).slice(0, limit||99), mx = rows[0] ? rows[0][1] : 1;
-  return rows.map(([c,v]) => { const s = style(c); return `<div class="catrow" data-cat="${esc(c)}"><div class="ic">${s.i}</div><div class="nm">${esc(c)}</div><div class="am">${fmt(v)} ₸</div><div class="bar"><i style="width:${v/mx*100}%;background:${s.c}"></i></div><div class="sub">${(v/tot*100).toFixed(0)}% · ${short(v/n)}/мес</div></div>`; }).join("") || `<div class="mut">Нет данных за период</div>`;
+function vOver(V, rv){
+  const I = sum(V.inc), E = sum(V.exp), n = V.ms.length||1, net = I-E, an = anomalies(V);
+  const share = I+E ? I/(I+E)*100 : 50;
+  const hero = `<div class="card"><div class="hero">
+    <div><div class="lbl">Итог за ${n} мес.</div><div class="big ${net>=0?"in":"out"}">${net>=0?"+":"−"}${fmt(Math.abs(net))} ₸</div><div class="small mut">${net>=0?"приходов больше, чем расходов":"расходов больше, чем приходов"}</div><div class="split"><i style="width:${share}%"></i></div></div>
+    <div data-d='${J({cls:"income",title:"Все приходы"})}' style="cursor:pointer"><div class="lbl">Приходы</div><div class="big in">${fmt(I)} ₸</div><div class="small mut">≈ ${short(I/n)} ₸ в месяц</div></div>
+    <div data-d='${J({cls:"expense",title:"Все расходы"})}' style="cursor:pointer"><div class="lbl">${ST.life?"Расходы (без переводов и кредитов)":"Расходы"}</div><div class="big out">${fmt(E)} ₸</div><div class="small mut">≈ ${short(E/n)} ₸ в месяц</div></div></div></div>`;
+  return banner(rv) + hero +
+   `<div class="card"><div class="top"><h2>Куда уходят деньги</h2></div>${donutBlock(V.exp,"expense","расходы",V,8)}<div class="note">Нажмите на категорию — увидите магазины и операции.</div></div>
+    <div class="card"><div class="top"><h2>Приходы и расходы по месяцам</h2></div>${monthBars(V,"both")}${an.out.size?`<div class="why-box" style="margin-top:12px">⚠ Аномальные месяцы: ${[...an.out.entries()].map(([m,a]) => `<b>${mLabel(m)}</b> (+${a.pct}% к обычному)`).join(", ")}. Нажмите на месяц, чтобы увидеть, из-за чего.</div>`:""}</div>
+    <div class="card"><div class="top"><h2>Откуда приходят деньги</h2></div>${donutBlock(V.inc,"income","приходы",V,8)}</div>
+    <div class="card"><h2>Выводы</h2><div class="ins">${insights(V)}</div></div>`;
 }
 function insights(V){
-  const n = V.ms.length || 1, life = LIFE(), L = V.exp.filter(t => life.has(t.cat)), out = [];
-  const cm = by(L, t => t.cat), tl = sum(L) || 1;
-  const food = (cm.get("Продукты")||0), cafe = (cm.get("Кафе и рестораны")||0);
-  if(food) out.push(`🛒 На продукты уходит в среднем <b>${fmt(food/n)} ₸ в месяц</b> (${(food/tl*100).toFixed(0)}% бытовых трат). Ещё <b>${fmt(cafe/n)} ₸</b> — кафе и фастфуд.`);
+  const n = V.ms.length || 1, L = V.exp.filter(isLifeExp), out = [];
+  const cm = by(L, t => t.cat), tl = sum(L) || 1, food = cm.get("Продукты")||0, cafe = cm.get("Кафе и рестораны")||0;
+  if(food) out.push(`🛒 На продукты уходит в среднем <b>${fmt(food/n)} ₸ в месяц</b> (${(food/tl*100).toFixed(0)}% бытовых трат). Кафе и фастфуд — ещё <b>${fmt(cafe/n)} ₸</b>.`);
+  const an = anomalies(V); if(an.out.size) out.push(`⚠ Обычно вы тратите около <b>${short(an.med)} ₸</b> в месяц, но ${[...an.out.keys()].map(mLabel).join(", ")} — заметно больше. Откройте месяц, там причина.`);
   const mm = sortDesc(by(V.exp, t => t.d.slice(0,7)));
-  if(mm.length>1) out.push(`📈 Самый затратный месяц — <b>${mLabel(mm[0][0])}</b> (${fmt(mm[0][1])} ₸), самый экономный — <b>${mLabel(mm[mm.length-1][0])}</b> (${fmt(mm[mm.length-1][1])} ₸).`);
-  const mon = by(V.exp, t => t.cat), tr = mon.get("Переводы людям")||0, cash = mon.get("Снятие наличных")||0, cr = mon.get("Кредиты и долги")||0, te = sum(V.exp)||1;
-  if(!ST.life) out.push(`🔀 Из всех расходов: переводы людям <b>${(tr/te*100).toFixed(0)}%</b>, наличные <b>${(cash/te*100).toFixed(0)}%</b>, кредиты <b>${(cr/te*100).toFixed(0)}%</b>. На собственно покупки приходится <b>${(tl/te*100).toFixed(0)}%</b> (${fmt(tl/n)} ₸/мес).`);
-  const mer = sortDesc(by(L, t => t.m)).slice(0,1)[0]; if(mer) out.push(`🏪 Больше всего потрачено в «${esc(mer[0])}» — ${fmt(mer[1])} ₸.`);
-  const sm = L.filter(t => t.amt<=1500); if(sm.length) out.push(`🪙 Мелких покупок (до 1 500 ₸): <b>${sm.length}</b> шт. на ${fmt(sum(sm))} ₸ — в среднем ${(sm.length/n).toFixed(0)} в месяц.`);
-  const unk = sum(L.filter(t => t.cat==="Прочие покупки")); if(unk/tl>0.08) out.push(`❓ ${(unk/tl*100).toFixed(0)}% бытовых трат не распознаны («Прочие покупки») — добавьте слова в config/categories.json, и раскладка станет точнее.`);
+  if(mm.length>1) out.push(`📈 Самый затратный месяц — <b>${mFull(mm[0][0])}</b> (${fmt(mm[0][1])} ₸), самый экономный — <b>${mFull(mm[mm.length-1][0])}</b> (${fmt(mm[mm.length-1][1])} ₸).`);
+  const mon = by(V.exp, t => t.cat), te = sum(V.exp)||1, tr = mon.get("Переводы людям")||0, cash = mon.get("Снятие наличных")||0, cr = mon.get("Кредиты и долги")||0;
+  if(!ST.life) out.push(`🔀 Из расходов: переводы людям <b>${(tr/te*100).toFixed(0)}%</b>, наличные <b>${(cash/te*100).toFixed(0)}%</b>, кредиты <b>${(cr/te*100).toFixed(0)}%</b>. На собственно покупки — <b>${(tl/te*100).toFixed(0)}%</b> (${fmt(tl/n)} ₸/мес).`);
+  const mer = sortDesc(by(L, t => t.m))[0]; if(mer) out.push(`🏪 Больше всего потрачено в «${esc(mer[0])}» — ${fmt(mer[1])} ₸.`);
+  const sm = L.filter(t => t.amt<=1500); if(sm.length) out.push(`🪙 Мелких покупок (до 1 500 ₸): <b>${sm.length}</b> шт. на ${fmt(sum(sm))} ₸ — ~${(sm.length/n).toFixed(0)} в месяц.`);
   return out.map(x => `<div>${x}</div>`).join("");
 }
-function vOver(V){
-  return `<div class="grid2"><div class="card"><h2>Доходы и расходы по месяцам</h2>${barChart(V)}</div>
-  <div class="card"><h2>На что уходят деньги</h2>${catList(V, 8)}<div class="mut small" style="margin-top:6px">Нажмите на категорию — увидите магазины и операции</div></div></div>
-  <div class="card"><h2>Выводы</h2><div class="ins">${insights(V)}</div></div>`;
-}
-function vCat(V){
-  return `<div class="card"><h2>Расходы по категориям</h2>${catList(V)}</div><div class="card"><h2>Структура расходов по месяцам</h2>${stacked(V)}</div>${heat(V)}`;
+function vExp(V, rv){
+  return banner(rv) + `<div class="card"><div class="top"><h2>Расходы по категориям</h2></div>${donutBlock(V.exp,"expense","расходы",V,40)}</div>
+  <div class="card"><h2>Структура по месяцам</h2><div class="note">Нажмите на столбик — откроется месяц.</div>${stackedExp(V)}</div>${heat(V)}`;
 }
 function heat(V){
   const cats = sortDesc(by(V.exp, t => t.cat)).map(x => x[0]), ms = V.ms, cell = new Map();
   V.exp.forEach(t => { const k = t.cat+"|"+t.d.slice(0,7); cell.set(k, (cell.get(k)||0)+t.amt); });
   const head = `<tr><th>Категория</th>${ms.map(m => `<th>${mLabel(m)}</th>`).join("")}<th>Среднее</th></tr>`;
   const body = cats.map(c => { const vals = ms.map(m => cell.get(c+"|"+m)||0), mx = Math.max(...vals,1), tot = vals.reduce((a,b)=>a+b,0);
-    return `<tr><td>${style(c).i} ${esc(c)}</td>${vals.map(v => `<td><span class="heat" style="display:block;padding:2px 6px;background:${v?hexA(style(c).c, .12+.55*v/mx):"transparent"}">${v?short(v):""}</span></td>`).join("")}<td><b>${short(tot/(ms.length||1))}</b></td></tr>`; }).join("");
-  return `<div class="card"><h2>Тепловая карта: категория × месяц</h2><div class="scroll"><table>${head}${body}</table></div></div>`;
+    return `<tr><td>${style(c).i} ${esc(c)}</td>${vals.map((v,i) => `<td>${v?`<span class="heat" data-d='${J({cat:c,month:ms[i],cls:"expense",title:c+" · "+mFull(ms[i])})}' style="background:${hexA(style(c).c,.15+.6*v/mx)}">${short(v)}</span>`:""}</td>`).join("")}<td><b>${short(tot/(ms.length||1))}</b></td></tr>`; }).join("");
+  return `<div class="card"><h2>Тепловая карта</h2><div class="note">Категория × месяц. Нажмите на ячейку — увидите операции.</div><div class="scroll"><table>${head}${body}</table></div></div>`;
 }
-const hexA = (h,a) => { const n = parseInt(h.slice(1),16); return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`; };
-function vMon(V){
-  const I = by(V.inc, t => t.d.slice(0,7)), E = by(V.exp, t => t.d.slice(0,7)), N = by(V.tx.filter(t=>t.cls==="expense"), t=>t.d.slice(0,7));
-  const rows = V.ms.slice().reverse().map(m => { const i = I.get(m)||0, e = E.get(m)||0; return `<tr><td>${mLabel(m)}</td><td class="in">${fmt(i)}</td><td class="out">${fmt(e)}</td><td class="${i-e>=0?"in":"out"}">${i-e>=0?"+":"−"}${fmt(Math.abs(i-e))}</td></tr>`; }).join("");
-  return `<div class="card"><h2>Доходы и расходы</h2>${barChart(V)}</div><div class="card"><h2>Таблица по месяцам</h2><div class="scroll"><table><tr><th>Месяц</th><th>Доходы</th><th>Расходы</th><th>Разница</th></tr>${rows}</table></div></div>
-  <div class="card"><h2>Откуда доходы</h2>${(()=>{ const m = sortDesc(by(V.inc, t=>t.cat)), tot = sum(V.inc)||1; return m.map(([c,v]) => `<div class="catrow" style="cursor:default"><div class="ic">${style(c).i}</div><div class="nm">${esc(c)}</div><div class="am">${fmt(v)} ₸</div><div class="bar"><i style="width:${v/tot*100}%;background:${style(c).c}"></i></div><div class="sub">${(v/tot*100).toFixed(0)}%</div></div>`).join(""); })()}</div>`;
+function vInc(V, rv){
+  const I = sum(V.inc), n = V.ms.length||1;
+  const big = V.inc.slice().sort((a,b)=>b.amt-a.amt).slice(0,10);
+  const parked = V.internal.filter(t => t.cat==="Крупные поступления на счёт");
+  return banner(rv) + `<div class="card"><div class="lbl">Всего приходов</div><div class="big in">${fmt(I)} ₸</div><div class="small mut">≈ ${short(I/n)} ₸ в месяц · без переводов между своими и депозитов</div></div>
+   <div class="card"><div class="top"><h2>Откуда приходят деньги</h2></div>${donutBlock(V.inc,"income","приходы",V,40)}</div>
+   <div class="card"><h2>Приходы по месяцам</h2><div class="note">Нажмите на столбик — увидите, что именно пришло.</div>${stackedIncome(V)}</div>
+   <div class="card"><h2>Самые крупные приходы</h2>${txList(big)}</div>
+   ${parked.length?`<div class="card"><h2>⚠ Крупные суммы, не учтённые в приходах</h2><div class="note">На счёт Halyk поступили крупные суммы без названия отправителя (всего ${fmt(sum(parked))} ₸). Похоже на возврат с депозита, поэтому я не считаю их доходом. Если среди них есть реальный доход (например, продажа квартиры) — нажмите на операцию и выберите категорию.</div>${txList(parked.sort((a,b)=>b.amt-a.amt))}</div>`:""}
+   <div class="card"><h2>Кредиты, полученные за период</h2>${V.loan.length?txList(V.loan.slice().sort((a,b)=>b.amt-a.amt).slice(0,10)):'<div class="mut">Нет</div>'}</div>`;
 }
-function vPeo(V){
-  const list = (arr, label) => { const m = sortDesc(by(arr, t => t.m)).slice(0,15), c = new Map(); arr.forEach(t => c.set(t.m,(c.get(t.m)||0)+1));
-    return `<div class="card"><h2>${label}</h2><table>${m.map(([k,v]) => `<tr><td class="tl" style="position:static">${esc(k)}</td><td>${c.get(k)} оп.</td><td><b>${fmt(v)} ₸</b></td></tr>`).join("") || "<tr><td>—</td></tr>"}</table></div>`; };
-  const to = V.exp.filter(t => t.cat==="Переводы людям"), from = V.inc.filter(t => t.cat==="Переводы от людей"), cash = V.exp.filter(t => t.cat==="Снятие наличных");
-  return `<div class="grid2">${list(to,"Кому больше всего переводите")}${list(from,"От кого больше всего получаете")}</div>
-  <div class="note">В Halyk получатель перевода на карту в выписке не указан — такие переводы собраны в одну строку «Перевод на карту». В Kaspi видно имя.</div>
-  <div class="grid2">${list(V.exp.filter(t=>t.cat==="Кредиты и долги"),"Кредиты и долги")}${list(cash,"Снятие наличных")}</div>`;
+function vMon(V, rv){
+  const an = anomalies(V), I = by(V.inc, t => t.d.slice(0,7)), E = an.E, mx = Math.max(1,...V.ms.map(m=>E.get(m)||0));
+  const cm = new Map(); V.exp.forEach(t => { const k = t.d.slice(0,7); if(!cm.has(k)) cm.set(k,new Map()); const c=cm.get(k); c.set(t.cat,(c.get(t.cat)||0)+t.amt); });
+  const rows = V.ms.slice().reverse().map(m => { const i = I.get(m)||0, e = E.get(m)||0, a = an.out.get(m), top = sortDesc(cm.get(m)||new Map()).slice(0,3).map(([c,v]) => `${style(c).i} ${c} ${short(v)}`).join(" · ");
+    return `<div class="mon" data-d='${J({month:m,title:mFull(m)})}'><div class="m">${mLabel(m)}${a?`<span class="badge">⚠ +${a.pct}%</span>`:""}</div><div class="b"><i style="width:${e/mx*100}%;background:${a?"var(--warn)":"var(--out)"}"></i></div><div class="v"><b class="out">−${short(e)}</b> <span class="in">+${short(i)}</span></div><div class="why">${top||"нет расходов"}</div></div>`; }).join("");
+  return banner(rv) + `<div class="card"><div class="top"><h2>Месяцы</h2></div>${monthBars(V,"both")}</div><div class="card"><h2>Каждый месяц отдельно</h2><div class="note">Нажмите на месяц — откроется разбор: что и почему.</div>${rows}</div>`;
 }
-function vOps(V){
-  const cats = [...new Set(V.tx.map(t => t.cat))].sort();
-  let a = V.tx.filter(t => t.cls!=="internal" || ST.cat==="__int");
-  if(ST.cat && ST.cat!=="__int") a = a.filter(t => t.cat===ST.cat);
-  if(ST.cat==="__int") a = V.tx.filter(t => t.cls==="internal");
+function vPeo(V, rv){
+  const list = (arr, label, cls, cat) => { const m = sortDesc(by(arr, t => t.m)).slice(0,15), c = new Map(); arr.forEach(t => c.set(t.m,(c.get(t.m)||0)+1));
+    return `<div class="card"><h2>${label}</h2><table>${m.map(([k,v]) => `<tr data-d='${J({m:k,cls,cat,title:k})}' style="cursor:pointer"><td class="tl" style="position:static">${esc(k)}</td><td>${c.get(k)} оп.</td><td><b>${fmt(v)} ₸</b></td></tr>`).join("") || "<tr><td>—</td></tr>"}</table></div>`; };
+  return banner(rv) + `<div class="grid2">${list(V.exp.filter(t=>t.cat==="Переводы людям"),"Кому переводите чаще всего","expense","Переводы людям")}${list(V.inc.filter(t=>t.cat==="Переводы от людей"),"От кого получаете чаще всего","income","Переводы от людей")}</div>
+  <div class="note">В Halyk получатель перевода на карту не указан — такие переводы собраны в строку «Перевод на карту». В Kaspi виден человек. Крупные переводы можно разметить во вкладке «Проверить».</div>
+  <div class="grid2">${list(V.exp.filter(t=>t.cat==="Кредиты и долги"),"Кредиты и долги","expense","Кредиты и долги")}${list(V.exp.filter(t=>t.cat==="Снятие наличных"),"Снятие наличных","expense","Снятие наличных")}</div>`;
+}
+function filterOps(V){
+  let a = V.tx.filter(t => t.cls!=="internal");
+  if(ST.cat==="__int") a = V.tx.filter(t => t.cls==="internal"); else if(ST.cat) a = a.filter(t => t.cat===ST.cat);
   if(ST.dir!=="all") a = a.filter(t => t.dir===ST.dir);
   const q = ST.search.toLowerCase(); if(q) a = a.filter(t => (t.m+" "+t.cat+" "+t.d+" "+t.amt).toLowerCase().includes(q));
-  a = a.slice().sort((x,y) => y.d.localeCompare(x.d) || y.amt-x.amt);
-  const shown = a.slice(0, ST.page*60);
+  return a.slice().sort((x,y) => y.d.localeCompare(x.d) || y.amt-x.amt);
+}
+function vOps(V){
+  const cats = [...new Set(V.tx.map(t => t.cat))].sort(), a = filterOps(V), shown = a.slice(0, ST.page*60);
   return `<div class="card"><div class="row"><input type="search" id="q" placeholder="Поиск: магазин, сумма, дата…" value="${esc(ST.search)}" style="flex:1;min-width:160px">
    <select id="fc"><option value="">Все категории</option>${cats.map(c => `<option ${ST.cat===c?"selected":""}>${esc(c)}</option>`).join("")}<option value="__int" ${ST.cat==="__int"?"selected":""}>↔ Между своими</option></select>
    <select id="fd"><option value="all">Все</option><option value="in" ${ST.dir==="in"?"selected":""}>Приход</option><option value="out" ${ST.dir==="out"?"selected":""}>Расход</option></select></div>
-   <div class="mut small" style="margin:8px 0">Найдено: ${a.length} · на сумму ${fmt(sum(a))} ₸</div>${txList(shown)}
+   <div class="mut small" style="margin:10px 0">Найдено: ${a.length} · на сумму ${fmt(sum(a))} ₸ · нажмите на операцию, чтобы изменить категорию</div><div id="oplist">${txList(shown)}</div>
    ${a.length>shown.length ? `<button class="chip" id="more" style="margin-top:10px">Показать ещё</button>` : ""}</div>`;
 }
+function vRev(V, rv){
+  const show = rv.slice(0,80);
+  return `<div class="card"><h2>Нужно уточнить</h2><div class="note">Здесь операции, где я мог ошибиться с категорией, — в основном крупные суммы. Нажмите «Верно», если всё правильно, или «Изменить», чтобы выбрать другую категорию (можно сразу для всех операций с таким названием). Ответы запоминаются на этом устройстве; кнопкой внизу их можно скопировать и прислать мне — я внесу их в расчёт навсегда.</div>
+   ${show.map(({t,why}) => `<div class="rev"><div><b>${esc(t.m)}</b><div class="small mut">${t.d.split("-").reverse().join(".")} · ${esc(t.p)} · ${style(t.cat).i} ${esc(t.cat)}</div></div><div class="${t.dir==="in"?"in":"out"}" style="font-weight:800;white-space:nowrap">${t.dir==="in"?"+":"−"}${fmt(t.amt)} ₸</div><div class="why">❓ ${esc(why)}</div><div class="btns"><button class="chip sm" data-ok="${t.id}">✓ Верно</button><button class="chip sm" data-e="${t.id}">✎ Изменить</button></div></div>`).join("") || `<div class="mut" style="padding:20px 0">Всё проверено 🎉</div>`}
+   ${rv.length>show.length?`<div class="note">Показано ${show.length} из ${rv.length}. Остальные появятся по мере ответов.</div>`:""}
+   <div class="row" style="margin-top:14px"><button class="sec" onclick="copyOV()">📋 Скопировать мои ответы (отправить Claude)</button></div></div>`;
+}
 function txList(a){
-  return a.map(t => `<div class="tx"><div class="d">${t.d.slice(8)}.${t.d.slice(5,7)}.${t.d.slice(2,4)}</div><div>${esc(t.m)}</div><div class="a ${t.dir==="in"?"in":"out"}">${t.dir==="in"?"+":"−"}${fmt(t.amt)} ₸</div><div class="c">${style(t.cat).i} ${esc(t.cat)} · ${esc(t.p)} · ${esc(t.a)}${t.f?" · "+esc(t.f):""}</div></div>`).join("");
+  return a.map(t => `<div class="tx" data-e="${t.id}"><div class="d">${t.d.slice(8)}.${t.d.slice(5,7)}<br>${t.d.slice(2,4)}</div><div class="nm">${esc(t.m)}${t.lov?' <span class="badge g">изм.</span>':""}</div><div class="a ${t.dir==="in"?"in":"out"}">${t.dir==="in"?"+":"−"}${fmt(t.amt)} ₸</div><div class="c">${style(t.cat).i} ${esc(t.cat)} · ${esc(t.p)} · ${esc(t.a)}${t.f?" · "+esc(t.f):""}</div></div>`).join("");
 }
 function bindView(V){
-  document.querySelectorAll(".catrow[data-cat]").forEach(r => r.onclick = () => openCat(V, r.dataset.cat));
-  const q = $("#q"); if(q){ q.oninput = () => { ST.search = q.value; ST.page = 1; const pos = q.selectionStart; $("#view").innerHTML = vOps(view()); const q2 = $("#q"); q2.focus(); q2.setSelectionRange(pos,pos); bindView(view()); }; }
+  const q = $("#q"); if(q){ q.oninput = () => { ST.search = q.value; ST.page = 1; const v = view(), a = filterOps(v); $("#oplist").innerHTML = txList(a.slice(0,60)); }; }
   const fc = $("#fc"); if(fc) fc.onchange = () => { ST.cat = fc.value; ST.page=1; render(); };
   const fd = $("#fd"); if(fd) fd.onchange = () => { ST.dir = fd.value; ST.page=1; render(); };
   const mo = $("#more"); if(mo) mo.onclick = () => { ST.page++; render(); };
+  document.querySelectorAll("[data-ok]").forEach(b => b.onclick = ev => { ev.stopPropagation(); const t = D.tx[+b.dataset.ok]; OV.tx[tkey(t)] = t.cat; saveOV(); applyOV(); render(); });
 }
-function openCat(V, c){
-  const arr = V.exp.filter(t => t.cat===c), s = style(c), n = V.ms.length||1;
-  const mer = sortDesc(by(arr, t => t.m)).slice(0,12), cnt = new Map(); arr.forEach(t => cnt.set(t.m,(cnt.get(t.m)||0)+1));
-  const per = by(arr, t => t.d.slice(0,7)), mx = Math.max(1, ...V.ms.map(m => per.get(m)||0));
-  const W = Math.max(300, V.ms.length*40);
-  const bars = V.ms.map((m,i) => { const h = (per.get(m)||0)/mx*90; return `<rect x="${i*40+6}" y="${110-h}" width="28" height="${h}" rx="4" fill="${s.c}"><title>${mLabel(m)}: ${fmt(per.get(m)||0)} ₸</title></rect><text x="${i*40+20}" y="124" font-size="10" text-anchor="middle" fill="var(--mut)">${mLabel(m).slice(0,3)}</text>${per.get(m)?`<text x="${i*40+20}" y="${106-h}" font-size="9" text-anchor="middle" fill="var(--mut)">${short(per.get(m))}</text>`:""}`; }).join("");
-  $("#sheet").innerHTML = `<div class="top"><h2 style="margin:0">${s.i} ${esc(c)}</h2><button class="chip" onclick="document.getElementById('modal').classList.remove('on')">Закрыть</button></div>
-   <div class="kpis"><div class="kpi"><div class="l">Всего</div><div class="v out">${fmt(sum(arr))} ₸</div></div><div class="kpi"><div class="l">В среднем в месяц</div><div class="v">${fmt(sum(arr)/n)} ₸</div></div><div class="kpi"><div class="l">Операций</div><div class="v">${arr.length}</div><div class="s">средний чек ${fmt(sum(arr)/(arr.length||1))} ₸</div></div></div>
-   <div class="card"><h2>По месяцам</h2><div class="scroll"><svg width="${W}" height="132">${bars}</svg></div></div>
-   <div class="card"><h2>Где тратите</h2><table>${mer.map(([k,v]) => `<tr><td class="tl" style="position:static">${esc(k)}</td><td>${cnt.get(k)} оп.</td><td><b>${fmt(v)} ₸</b></td></tr>`).join("")}</table></div>
-   <div class="card"><h2>Последние операции</h2>${txList(arr.slice().sort((a,b)=>b.d.localeCompare(a.d)).slice(0,40))}</div>`;
-  $("#modal").classList.add("on");
+
+/* ───── drill-down ───── */
+function sel(V, d){
+  return V.tx.filter(t => (d.cls ? (d.cls==="income" ? (t.cls==="income"||t.cls==="loan_in") : t.cls===d.cls) : t.cls!=="internal")
+    && (!d.cat || t.cat===d.cat) && (!d.m || t.m===d.m) && (!d.month || t.d.startsWith(d.month))
+    && !(ST.life && t.cls==="expense" && !d.cat && !isLifeExp(t)));
+}
+function drill(d, noPush){
+  if(!noPush) STACK.push(d);
+  const V = view(), arr = sel(V, d), exp = arr.filter(t=>t.cls==="expense"), inc = arr.filter(t=>t.cls==="income"||t.cls==="loan_in");
+  const n = V.ms.length||1, sg = !d.month && n>1;
+  let h = `<div class="top"><div><h2>${esc(d.title||"Операции")}</h2><div class="small mut">${d.month?(d.title&&d.title.includes(mFull(d.month))?"":mFull(d.month)):`${mFull(ST.from)} — ${mFull(ST.to)}`}${ST.who!=="all"?" · "+esc(ST.who):""}</div></div><div class="row">${STACK.length>1?`<button class="chip" onclick="drillBack()">← Назад</button>`:""}<button class="chip" onclick="closeDrill()">✕</button></div></div>`;
+  h += `<div class="kp">${exp.length?`<div><span class="lbl">Расходы</span><b class="out">${fmt(sum(exp))} ₸</b></div>`:""}${inc.length?`<div><span class="lbl">Приходы</span><b class="in">${fmt(sum(inc))} ₸</b></div>`:""}${sg&&(exp.length||inc.length)?`<div><span class="lbl">В среднем в месяц</span><b>${fmt((exp.length?sum(exp):sum(inc))/n)} ₸</b></div>`:""}<div><span class="lbl">Операций</span><b>${arr.length}</b></div></div>`;
+  if(d.month && !d.cat && !d.m && !d.cls){
+    const an = anomalies(V), a = an.out.get(d.month), others = V.ms.filter(m => m!==d.month);
+    const cm = by(exp, t => t.cat), lines = [];
+    if(others.length){ const base = new Map(); V.exp.filter(t => t.d.slice(0,7)!==d.month).forEach(t => base.set(t.cat,(base.get(t.cat)||0)+t.amt));
+      sortDesc(new Map([...cm].map(([c,v]) => [c, v-(base.get(c)||0)/others.length]))).filter(x=>x[1]>20000).slice(0,4).forEach(([c,dl]) => lines.push(`${style(c).i} <b>${esc(c)}</b>: ${fmt(cm.get(c))} ₸ — на ${fmt(dl)} ₸ больше обычного`)); }
+    const topx = exp.slice().sort((x,y)=>y.amt-x.amt).slice(0,3).map(t => `${esc(t.m)} — ${fmt(t.amt)} ₸`);
+    h += `<div class="why-box"><b>${a?`⚠ Расходы выше обычного на ${a.pct}%`:"Что в этом месяце"}</b> (обычно ~${short(an.med)} ₸)<ul style="margin:6px 0 0;padding-left:18px">${lines.map(l=>`<li>${l}</li>`).join("")}${topx.length?`<li>Крупнейшие траты: ${topx.join("; ")}</li>`:""}</ul></div>`;
+  }
+  if(sg){ const per = by(arr, t => t.d.slice(0,7)), mx = Math.max(1,...per.values()), col = exp.length>=inc.length?"var(--out)":"var(--in)", W = Math.max(300, V.ms.length*44+10);
+    const bars = V.ms.map((m,i) => { const v = per.get(m)||0, hh = v/mx*100; return `<g data-d='${J({...d,month:m,title:d.title+" · "+mLabel(m)})}' style="cursor:pointer"><rect x="${i*44+4}" y="0" width="40" height="150" fill="transparent"/><rect x="${i*44+8}" y="${128-hh}" width="30" height="${hh}" rx="5" fill="${col}"/><text x="${i*44+23}" y="144" font-size="11" text-anchor="middle" fill="var(--mut)">${MN[+m.slice(5)-1]}</text>${v?`<text x="${i*44+23}" y="${123-hh}" font-size="10" text-anchor="middle" fill="var(--mut)">${short(v)}</text>`:""}</g>`; }).join("");
+    h += `<div class="card"><h2>По месяцам</h2><div class="scroll"><svg width="${W}" height="150">${bars}</svg></div></div>`; }
+  const cats = (a, cls, title) => a.length && !d.cat ? `<div class="card"><h2>${title}</h2>${catRows(a, cls, 12, V, !!d.month)}</div>` : "";
+  h += cats(exp,"expense","Расходы по категориям") + cats(inc,"income","Приходы по категориям");
+  if(!d.m && (d.cat || d.cls)){ const base = d.cls==="income"?inc:exp, m = sortDesc(by(base, t=>t.m)).slice(0,12), c = new Map(); base.forEach(t => c.set(t.m,(c.get(t.m)||0)+1));
+    if(m.length>1) h += `<div class="card"><h2>${d.cls==="income"?"От кого / откуда":"Где и кому"}</h2><table>${m.map(([k,v]) => `<tr data-d='${J({...d,m:k,title:k})}' style="cursor:pointer"><td class="tl" style="position:static">${esc(k)}</td><td>${c.get(k)} оп.</td><td><b>${fmt(v)} ₸</b></td></tr>`).join("")}</table></div>`; }
+  const lim = d.lim || 40, list = arr.slice().sort((x,y) => y.amt-x.amt);
+  h += `<div class="card"><h2>Операции <span class="small mut">(крупные сверху · нажмите, чтобы изменить категорию)</span></h2>${txList(list.slice(0,lim))}${list.length>lim?`<button class="chip" onclick="STACK[STACK.length-1].lim=${lim+60};drill(STACK[STACK.length-1],true)">Показать ещё</button>`:""}</div>`;
+  const sh = $("#sheet"), top = sh.scrollTop; sh.innerHTML = h; $("#modal").classList.add("on"); sh.scrollTop = noPush ? top : 0;
+}
+function drillBack(){ STACK.pop(); drill(STACK[STACK.length-1], true); }
+function closeDrill(){ STACK = []; $("#modal").classList.remove("on"); }
+
+/* ───── редактор операции ───── */
+function catOptions(dir, cur){
+  const exp = [...D.groups.life, ...D.groups.money.filter(c => c!=="Комиссии банка" || true)];
+  const custom = [...new Set([...Object.values(OV.tx), ...Object.values(OV.merchant)])].filter(c => !D.categories[c]);
+  const g = (label, list) => `<optgroup label="${label}">${[...new Set(list)].map(c => `<option ${c===cur?"selected":""}>${esc(c)}</option>`).join("")}</optgroup>`;
+  return dir==="in" ? g("Приходы", INCC) + g("Не считать", [...D.kinds.internal, ...D.kinds.loan]) + (custom.length?g("Мои категории",custom):"") + g("Возврат покупки", exp)
+                    : g("Расходы", exp) + g("Не считать", D.kinds.internal) + (custom.length?g("Мои категории",custom):"");
+}
+function openEdit(t){
+  const same = D.tx.filter(x => x.m===t.m && x.dir===t.dir).length;
+  $("#edsheet").innerHTML = `<div class="top"><h2>Изменить категорию</h2><button class="chip" onclick="$('#ed').classList.remove('on')">✕</button></div>
+   <div class="card"><b>${esc(t.m)}</b><div class="${t.dir==="in"?"in":"out"}" style="font-size:24px;font-weight:800">${t.dir==="in"?"+":"−"}${fmt(t.amt)} ₸</div>
+   <div class="small mut">${t.d.split("-").reverse().join(".")} · ${esc(t.p)} · ${esc(t.a)}${t.f?" · "+esc(t.f):""}<br>Сейчас: ${style(t.cat).i} ${esc(t.cat)}${t.cls==="internal"?" (не учитывается)":""}</div>
+   <label class="f">Выберите категорию</label><select id="ecat" style="width:100%">${catOptions(t.dir,t.cat)}<option value="__new">➕ Новая категория…</option></select>
+   <input type="text" id="enew" placeholder="Название новой категории" style="width:100%;margin-top:8px;display:none">
+   <label class="f" style="display:flex;gap:8px;align-items:center;color:var(--ink)"><input type="checkbox" id="eall" ${same>1?"":"disabled"}> ${same>1?`Для всех ${same} операций «${esc(t.m)}» (${t.dir==="in"?"приходы":"расходы"})`:"Единственная операция с таким названием"}</label>
+   <div class="row" style="margin-top:16px"><button class="main" style="flex:1" id="esave">Сохранить</button>${t.lov?`<button class="sec" id="ereset">Сбросить</button>`:""}</div></div>`;
+  $("#ecat").onchange = e => { $("#enew").style.display = e.target.value==="__new" ? "block" : "none"; };
+  $("#esave").onclick = () => { let c = $("#ecat").value; if(c==="__new") c = $("#enew").value.trim(); if(!c) return;
+    if($("#eall").checked) OV.merchant[t.m+"|"+t.dir] = c; else OV.tx[tkey(t)] = c;
+    saveOV(); applyOV(); $("#ed").classList.remove("on"); afterEdit(); };
+  const rs = $("#ereset"); if(rs) rs.onclick = () => { delete OV.tx[tkey(t)]; delete OV.merchant[t.m+"|"+t.dir]; saveOV(); applyOV(); $("#ed").classList.remove("on"); afterEdit(); };
+  $("#ed").classList.add("on");
+}
+function afterEdit(){ render(); if(STACK.length) drill(STACK[STACK.length-1], true); }
+function copyOV(){
+  const txt = JSON.stringify(OV, null, 1);
+  (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => alert("Скопировано. Вставьте в чат с Claude."), () => prompt("Скопируйте и отправьте Claude:", txt));
 }
 boot();
 </script>
