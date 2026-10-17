@@ -182,7 +182,8 @@ const sync = () => { $("#from").value = ST.from; $("#to").value = ST.to; };
 function applyOV(){
   D.tx.forEach(t => {
     t.cat = t.bc; t.cls = t.bl; t.lov = 0;
-    const n = OV.tx[tkey(t)] || OV.merchant[t.m+"|"+t.dir];
+    let n = OV.tx[tkey(t)];
+    if(!n){ n = OV.merchant[t.m+"|"+t.dir]; if(n && t.bl==="internal" && clsFor(n,t.dir)!=="internal") n = null; }
     if(n){ t.cat = n; t.cls = clsFor(n, t.dir); t.lov = 1; }
   });
 }
