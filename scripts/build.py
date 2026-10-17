@@ -161,6 +161,8 @@ def classify(txs, family_names):
             elif k == "Пополнение":
                 if norm(desc) in family_names:
                     cls, cat = "internal", "Между своими (семья)"
+                elif "отбасы" in text:
+                    cat = "Квартира (Отбасы)"
                 elif "с карты другого банка" in text or "kaspi терминал" in text or "банкомат" in text:
                     cat = "Пополнение с карт/наличными"
                 else:
@@ -187,6 +189,8 @@ def classify(txs, family_names):
                 cls, cat, m = "income", "Зарплата", "АО Каражанбасмунай"
             elif "депозит" in text and "оплата" not in text and "коммерсант" not in text:
                 cls, cat, m = "internal", "Депозиты/свои счета", "Депозит Halyk"
+            elif "hcsbk deposit" in text or "deposit" in text and "коммерсант" in text:
+                cls, cat, m = "internal", "Депозиты/свои счета", "Депозит (HCSBK)"
             elif "жилстройсбербанк" in text and "пополнение депозита" in text:
                 cls, cat, m = "internal", "Депозиты/свои счета", "Депозит ЖССБ"
             elif "жилстройсбербанк" in text:
@@ -215,12 +219,37 @@ def classify(txs, family_names):
                 cat = "Прочее"
             if s > 0 and cat == "Прочие покупки":  # возврат
                 cat = "Возвраты"
-        if s > 0 and cls == "income" and cat in CFG["purchase_cats"]:
+        if s < 0 and cat in CFG.get("caps", {}) and abs(s) > CFG["caps"][cat]:
+            cat = "Прочие покупки"
+        if s > 0 and cls == "income" and (cat in CFG["purchase_cats"] or cat in CFG["groups"]["money"]):
             cat = "Возвраты"
         res.append({"i": i, "d": t["d"], "p": t["p"], "a": t["a"], "b": t["b"], "amt": abs(s),
                     "dir": "in" if s > 0 else "out", "cls": cls, "cat": cat, "m": m,
                     "k": k if t["b"] == "kaspi" else "", "f": t["f"]})
     return res
+
+
+def tkey(r):
+    a = f"{r['amt']:.2f}".rstrip("0").rstrip(".")
+    return f"{r['d']}|{a}|{r['m']}|{r['a']}"
+
+
+def cls_for(cat, direction):
+    if cat in CFG["internal_cats"]:
+        return "internal"
+    if cat in CFG["loan_cats"]:
+        return "loan_in"
+    return "income" if direction == "in" else "expense"
+
+
+def apply_overrides(rows, ov):
+    n = 0
+    for r in rows:
+        new = ov.get("tx", {}).get(tkey(r)) or ov.get("merchant", {}).get(f"{r['m']}|{r['dir']}")
+        if new:
+            r["cat"], r["cls"], r["ov"] = new, cls_for(new, r["dir"]), 1
+            n += 1
+    return n
 
 
 def pair_internal(rows):
@@ -282,7 +311,7 @@ def main():
     if not args.plain:
         password = os.environ.get("APP_PASSWORD") or getpass.getpass("Пароль для шифрования данных: ")
 
-    ledger, old_fam = [], set()
+    ledger, old_fam, old_ov = [], set(), {}
     store = OUT_PLAIN if args.plain else OUT
     if store.exists() and not args.fresh:
         try:
@@ -291,7 +320,7 @@ def main():
                 data = raw
             else:
                 data = json.loads(gzip.decompress(decrypt(raw, password)))
-            ledger, old_fam = data["ledger"], set(data.get("family", []))
+            ledger, old_fam, old_ov = data["ledger"], set(data.get("family", [])), data.get("overrides", {})
             print(f"Архив: {len(ledger)} операций")
         except Exception as e:  # noqa: BLE001
             print(f"Не смог открыть архив ({e.__class__.__name__}) — неверный пароль? Стартую с нуля только если --fresh")
@@ -308,6 +337,11 @@ def main():
     fam_names = {norm(x) for x in CFG.get("family_names", [])} | old_fam | new_fam
     rows = classify(ledger, fam_names)
     paired = pair_internal(rows)
+    ov = {"tx": {}, "merchant": {}}
+    for src in (old_ov, json.loads((ROOT / "config" / "overrides.json").read_text(encoding="utf-8")) if (ROOT / "config" / "overrides.json").exists() else {}):
+        ov["tx"].update(src.get("tx", {}))
+        ov["merchant"].update(src.get("merchant", {}))
+    print(f"Ручных правок применено: {apply_overrides(rows, ov)}")
 
     for r in rows:
         r.pop("i", None)
@@ -319,6 +353,8 @@ def main():
         "tx": rows,              # классифицированные
         "categories": CFG["category_style"],
         "groups": CFG["groups"],
+        "kinds": {"internal": CFG["internal_cats"], "loan": CFG["loan_cats"], "income": CFG["income_cats"]},
+        "overrides": ov,
     }
     blob = gzip.compress(json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode())
     OUT.parent.mkdir(exist_ok=True)
