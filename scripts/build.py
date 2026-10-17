@@ -245,7 +245,12 @@ def cls_for(cat, direction):
 def apply_overrides(rows, ov):
     n = 0
     for r in rows:
-        new = ov.get("tx", {}).get(tkey(r)) or ov.get("merchant", {}).get(f"{r['m']}|{r['dir']}")
+        new = ov.get("tx", {}).get(tkey(r))
+        if not new:
+            new = ov.get("merchant", {}).get(f"{r['m']}|{r['dir']}")
+            # общее правило по названию не должно «разъединять» найденные переводы между своими
+            if new and r["cls"] == "internal" and cls_for(new, r["dir"]) != "internal":
+                new = None
         if new:
             r["cat"], r["cls"], r["ov"] = new, cls_for(new, r["dir"]), 1
             n += 1
